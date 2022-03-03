@@ -31,6 +31,7 @@ jobs:
       uses: 'google-github-actions/auth@v0'
       with:
         credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+    - name: Upload to Artifact Registry
       run: |
         gcloud artifacts print-settings python > ~/.pypirc
         python -m twine upload --repository rprod dist/*

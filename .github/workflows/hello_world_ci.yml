@@ -35,10 +35,10 @@ jobs:
         credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
     - name: Upload to Artifact Registry
       run: |
-        echo $GOOGLE_APPLICATION_CREDENTIALS
         gcloud config set artifacts/repository rprod
         gcloud config set artifacts/location us-central1
         gcloud config set account hello-world@wmd-sandbox.iam.gserviceaccount.com
+        gcloud auth activate-service-account hello-world@wmd-sandbox.iam.gserviceaccount.com --key-file=$GOOGLE_APPLICATION_CREDENTIALS --project=wmd-sandbox
         gcloud artifacts print-settings python > ~/.pypirc
         python -m twine upload --repository rprod dist/*
       

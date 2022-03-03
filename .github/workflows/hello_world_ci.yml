@@ -38,7 +38,7 @@ jobs:
         echo $GOOGLE_APPLICATION_CREDENTIALS
         gcloud config set artifacts/repository rprod
         gcloud config set artifacts/location us-central1
-        gcloud config set account rprod-push@wmd-sandbox.iam.gserviceaccount.com
+        gcloud config set account hello-world@wmd-sandbox.iam.gserviceaccount.com
         gcloud artifacts print-settings python > ~/.pypirc
         python -m twine upload --repository rprod dist/*
       

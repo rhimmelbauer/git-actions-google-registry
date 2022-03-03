@@ -12,6 +12,8 @@ jobs:
       max-parallel: 4
       matrix:
         python-version: [3.7]
+    env:
+      GOOGLE_APPLICATION_CREDENTIALS: '${{ secrets.GOOGLE_CREDENTIALS }}'
 
     steps:
     - uses: actions/checkout@v2
@@ -33,6 +35,7 @@ jobs:
         credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
     - name: Upload to Artifact Registry
       run: |
+        echo $GOOGLE_APPLICATION_CREDENTIALS
         gcloud config set artifacts/repository rprod
         gcloud config set artifacts/location us-central1
         gcloud config set account rprod-push@wmd-sandbox.iam.gserviceaccount.com

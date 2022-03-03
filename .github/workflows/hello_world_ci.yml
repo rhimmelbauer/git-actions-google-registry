@@ -35,7 +35,6 @@ jobs:
       run: |
         gcloud config set artifacts/repository rprod
         gcloud config set artifacts/location us-central1
-        gcloud auth application-default login
         gcloud artifacts print-settings python > ~/.pypirc
         python -m twine upload --repository rprod dist/*
       

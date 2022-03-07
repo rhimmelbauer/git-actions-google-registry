@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 package_metadata = {
     'name': 'hello-world-rob',
-    'version': '0.1.0',
+    'version': '0.1.1',
     'description': 'Testing out git actions with gcloud registry',
     'long_description': 'Testing out git actions with gcloud registry',
     'url': 'https://github.com/rhimmelbauer/django-user-notifications/',

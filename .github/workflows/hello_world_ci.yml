@@ -15,7 +15,7 @@ jobs:
     env:
       GOOGLE_APPLICATION_CREDENTIALS: '${{ secrets.GOOGLE_CREDENTIALS }}'
       GCR_REPO_NAME: '${{ secrets.GCR_REPO_NAME }}'
-
+      GCR_REPO_LOCATION: '${{ secrets.GCR_REPO_LOCATION }}'
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
@@ -27,10 +27,10 @@ jobs:
       uses: 'google-github-actions/auth@v0'
       with:
         credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
-    - name: Upload to Artifact Registry
+    - name: Setup Artifact Registry
       run: |
         gcloud config set artifacts/repository $GCR_REPO_NAME
-        gcloud config set artifacts/location us-central1
+        gcloud config set artifacts/location $GCR_REPO_LOCATION
         gcloud config set account github-gcr-service-account@norrin-radd.iam.gserviceaccount.com
         gcloud auth activate-service-account github-gcr-service-account@norrin-radd.iam.gserviceaccount.com --key-file=$GOOGLE_APPLICATION_CREDENTIALS --project=norrin-radd
         gcloud artifacts print-settings python > ~/.pypirc

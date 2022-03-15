@@ -13,7 +13,6 @@ jobs:
       matrix:
         python-version: [3.7]
     env:
-      GOOGLE_APPLICATION_CREDENTIALS: '${{ secrets.GOOGLE_CREDENTIALS }}'
       GCR_REPO_NAME: '${{ secrets.GCR_REPO_NAME }}'
       GCR_REPO_LOCATION: '${{ secrets.GCR_REPO_LOCATION }}'
       GCR_SERVICE_ACCOUNT_EMAIL: '${{ secrets.GCR_SERVICE_ACCOUNT_EMAIL }}'
@@ -35,7 +34,7 @@ jobs:
         gcloud config set artifacts/repository $GCR_REPO_NAME
         gcloud config set artifacts/location $GCR_REPO_LOCATION
         gcloud config set account $GCR_SERVICE_ACCOUNT_EMAIL
-        gcloud auth activate-service-account $GCR_SERVICE_ACCOUNT_EMAIL --key-file='${{ secrets.GOOGLE_CREDENTIALS }}' --project=GC_PROJECT_ID
+        gcloud auth activate-service-account $GCR_SERVICE_ACCOUNT_EMAIL --key-file='${{ secrets.GOOGLE_CREDENTIALS }}' --project=$GC_PROJECT_ID
         gcloud artifacts print-settings python > ~/.pypirc
         mkdir -p ~/.config/pip/
         cp ~/.pypirc ~/.config/pip/pip.conf

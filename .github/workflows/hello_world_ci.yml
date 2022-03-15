@@ -14,7 +14,7 @@ jobs:
         python-version: [3.7]
     env:
       GOOGLE_APPLICATION_CREDENTIALS: '${{ secrets.GOOGLE_CREDENTIALS }}'
-      GCR_REPO_NAME: '${{ serects.GCR_REPO_NAME }}'
+      GCR_REPO_NAME: '${{ secrets.GCR_REPO_NAME }}'
 
     steps:
     - uses: actions/checkout@v2

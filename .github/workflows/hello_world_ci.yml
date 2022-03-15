@@ -13,6 +13,7 @@ jobs:
       matrix:
         python-version: [3.7]
     env:
+      GOOGLE_APPLICATION_CREDENTIALS: '${{ secrets.GOOGLE_CREDENTIALS }}'
       GCR_REPO_NAME: '${{ secrets.GCR_REPO_NAME }}'
       GCR_REPO_LOCATION: '${{ secrets.GCR_REPO_LOCATION }}'
       GCR_SERVICE_ACCOUNT_EMAIL: '${{ secrets.GCR_SERVICE_ACCOUNT_EMAIL }}'

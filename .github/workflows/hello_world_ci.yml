@@ -16,6 +16,7 @@ jobs:
       GOOGLE_APPLICATION_CREDENTIALS: '${{ secrets.GOOGLE_CREDENTIALS }}'
       GCR_REPO_NAME: '${{ secrets.GCR_REPO_NAME }}'
       GCR_REPO_LOCATION: '${{ secrets.GCR_REPO_LOCATION }}'
+      GCR_SERVICE_ACCOUNT_EMAIL: '${{ secrets.GCR_SERVICE_ACCOUNT_EMAIL }}'
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
@@ -31,8 +32,8 @@ jobs:
       run: |
         gcloud config set artifacts/repository $GCR_REPO_NAME
         gcloud config set artifacts/location $GCR_REPO_LOCATION
-        gcloud config set account github-gcr-service-account@norrin-radd.iam.gserviceaccount.com
-        gcloud auth activate-service-account github-gcr-service-account@norrin-radd.iam.gserviceaccount.com --key-file=$GOOGLE_APPLICATION_CREDENTIALS --project=norrin-radd
+        gcloud config set account $GCR_SERVICE_ACCOUNT_EMAIL
+        gcloud auth activate-service-account $GCR_SERVICE_ACCOUNT_EMAIL --key-file=$GOOGLE_APPLICATION_CREDENTIALS --project=norrin-radd
         gcloud artifacts print-settings python > ~/.pypirc
         mkdir -p ~/.config/pip/
         cp ~/.pypirc ~/.config/pip/pip.conf
